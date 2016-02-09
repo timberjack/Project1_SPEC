@@ -1,6 +1,0 @@
-export GEM5_DIR=/media/xnwang30/Storage/gem5/gem5-stable
-export BENCHMARK=./src/benchmark
-export ARGUMENT1=./data/input.program
-export ARGUMENT2=1
-sudo $GEM5_DIR/build/X86/gem5.opt $GEM5_DIR/configs/example/se.py -c $BENCHMARK -o "$ARGUMENT1 $ARGUMENT2"
-
