@@ -1,0 +1,659 @@
+{
+    "name": null, 
+    "sim_quantum": 0, 
+    "system": {
+        "kernel": "", 
+        "mmap_using_noreserve": false, 
+        "kernel_addr_check": true, 
+        "membus": {
+            "slave": {
+                "peer": [
+                    "system.system_port", 
+                    "system.l2.mem_side", 
+                    "system.cpu.interrupts.int_master"
+                ], 
+                "role": "SLAVE"
+            }, 
+            "name": "membus", 
+            "snoop_filter": null, 
+            "forward_latency": 4, 
+            "clk_domain": "system.clk_domain", 
+            "system": "system", 
+            "width": 16, 
+            "eventq_index": 0, 
+            "master": {
+                "peer": [
+                    "system.cpu.interrupts.pio", 
+                    "system.cpu.interrupts.int_slave", 
+                    "system.mem_ctrls.port"
+                ], 
+                "role": "MASTER"
+            }, 
+            "response_latency": 2, 
+            "cxx_class": "CoherentXBar", 
+            "path": "system.membus", 
+            "snoop_response_latency": 4, 
+            "type": "CoherentXBar", 
+            "use_default_range": false, 
+            "frontend_latency": 3
+        }, 
+        "symbolfile": "", 
+        "readfile": "", 
+        "cxx_class": "System", 
+        "load_offset": 0, 
+        "work_end_ckpt_count": 0, 
+        "memories": [
+            "system.mem_ctrls"
+        ], 
+        "work_begin_ckpt_count": 0, 
+        "clk_domain": {
+            "name": "clk_domain", 
+            "clock": [
+                1000
+            ], 
+            "init_perf_level": 0, 
+            "voltage_domain": "system.voltage_domain", 
+            "eventq_index": 0, 
+            "cxx_class": "SrcClockDomain", 
+            "path": "system.clk_domain", 
+            "type": "SrcClockDomain", 
+            "domain_id": -1
+        }, 
+        "mem_ranges": [
+            "0:536870911"
+        ], 
+        "eventq_index": 0, 
+        "dvfs_handler": {
+            "enable": false, 
+            "name": "dvfs_handler", 
+            "sys_clk_domain": "system.clk_domain", 
+            "transition_latency": 100000000, 
+            "eventq_index": 0, 
+            "cxx_class": "DVFSHandler", 
+            "domains": [], 
+            "path": "system.dvfs_handler", 
+            "type": "DVFSHandler"
+        }, 
+        "work_end_exit_count": 0, 
+        "type": "System", 
+        "voltage_domain": {
+            "name": "voltage_domain", 
+            "eventq_index": 0, 
+            "voltage": [
+                "1.0"
+            ], 
+            "cxx_class": "VoltageDomain", 
+            "path": "system.voltage_domain", 
+            "type": "VoltageDomain"
+        }, 
+        "cache_line_size": 64, 
+        "boot_osflags": "a", 
+        "work_cpus_ckpt_count": 0, 
+        "work_begin_exit_count": 0, 
+        "path": "system", 
+        "cpu_clk_domain": {
+            "name": "cpu_clk_domain", 
+            "clock": [
+                500
+            ], 
+            "init_perf_level": 0, 
+            "voltage_domain": "system.cpu_voltage_domain", 
+            "eventq_index": 0, 
+            "cxx_class": "SrcClockDomain", 
+            "path": "system.cpu_clk_domain", 
+            "type": "SrcClockDomain", 
+            "domain_id": -1
+        }, 
+        "tol2bus": {
+            "slave": {
+                "peer": [
+                    "system.cpu.icache.mem_side", 
+                    "system.cpu.dcache.mem_side", 
+                    "system.cpu.itb_walker_cache.mem_side", 
+                    "system.cpu.dtb_walker_cache.mem_side"
+                ], 
+                "role": "SLAVE"
+            }, 
+            "name": "tol2bus", 
+            "snoop_filter": null, 
+            "forward_latency": 0, 
+            "clk_domain": "system.cpu_clk_domain", 
+            "system": "system", 
+            "width": 32, 
+            "eventq_index": 0, 
+            "master": {
+                "peer": [
+                    "system.l2.cpu_side"
+                ], 
+                "role": "MASTER"
+            }, 
+            "response_latency": 1, 
+            "cxx_class": "CoherentXBar", 
+            "path": "system.tol2bus", 
+            "snoop_response_latency": 1, 
+            "type": "CoherentXBar", 
+            "use_default_range": false, 
+            "frontend_latency": 1
+        }, 
+        "mem_mode": "timing", 
+        "name": "system", 
+        "init_param": 0, 
+        "system_port": {
+            "peer": "system.membus.slave[0]", 
+            "role": "MASTER"
+        }, 
+        "load_addr_mask": 1099511627775, 
+        "cpu": [
+            {
+                "do_statistics_insts": true, 
+                "numThreads": 1, 
+                "itb": {
+                    "name": "itb", 
+                    "eventq_index": 0, 
+                    "cxx_class": "X86ISA::TLB", 
+                    "walker": {
+                        "name": "walker", 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "system": "system", 
+                        "eventq_index": 0, 
+                        "cxx_class": "X86ISA::Walker", 
+                        "path": "system.cpu.itb.walker", 
+                        "type": "X86PagetableWalker", 
+                        "port": {
+                            "peer": "system.cpu.itb_walker_cache.cpu_side", 
+                            "role": "MASTER"
+                        }, 
+                        "num_squash_per_cycle": 4
+                    }, 
+                    "path": "system.cpu.itb", 
+                    "type": "X86TLB", 
+                    "size": 64
+                }, 
+                "system": "system", 
+                "dtb_walker_cache": {
+                    "is_top_level": true, 
+                    "prefetcher": null, 
+                    "clk_domain": "system.cpu_clk_domain", 
+                    "write_buffers": 8, 
+                    "response_latency": 2, 
+                    "cxx_class": "BaseCache", 
+                    "size": 1024, 
+                    "tags": {
+                        "name": "tags", 
+                        "eventq_index": 0, 
+                        "hit_latency": 2, 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "sequential_access": false, 
+                        "assoc": 2, 
+                        "cxx_class": "LRU", 
+                        "path": "system.cpu.dtb_walker_cache.tags", 
+                        "block_size": 64, 
+                        "type": "LRU", 
+                        "size": 1024
+                    }, 
+                    "system": "system", 
+                    "max_miss_count": 0, 
+                    "eventq_index": 0, 
+                    "mem_side": {
+                        "peer": "system.tol2bus.slave[3]", 
+                        "role": "MASTER"
+                    }, 
+                    "mshrs": 10, 
+                    "forward_snoops": false, 
+                    "hit_latency": 2, 
+                    "demand_mshr_reserve": 1, 
+                    "tgts_per_mshr": 12, 
+                    "addr_ranges": [
+                        "0:18446744073709551615"
+                    ], 
+                    "assoc": 2, 
+                    "prefetch_on_access": false, 
+                    "path": "system.cpu.dtb_walker_cache", 
+                    "name": "dtb_walker_cache", 
+                    "type": "BaseCache", 
+                    "sequential_access": false, 
+                    "cpu_side": {
+                        "peer": "system.cpu.dtb.walker.port", 
+                        "role": "SLAVE"
+                    }
+                }, 
+                "function_trace": false, 
+                "do_checkpoint_insts": true, 
+                "cxx_class": "TimingSimpleCPU", 
+                "max_loads_all_threads": 0, 
+                "apic_clk_domain": {
+                    "name": "apic_clk_domain", 
+                    "clk_domain": "system.cpu_clk_domain", 
+                    "eventq_index": 0, 
+                    "cxx_class": "DerivedClockDomain", 
+                    "path": "system.cpu.apic_clk_domain", 
+                    "type": "DerivedClockDomain", 
+                    "clk_divider": 16
+                }, 
+                "itb_walker_cache": {
+                    "is_top_level": true, 
+                    "prefetcher": null, 
+                    "clk_domain": "system.cpu_clk_domain", 
+                    "write_buffers": 8, 
+                    "response_latency": 2, 
+                    "cxx_class": "BaseCache", 
+                    "size": 1024, 
+                    "tags": {
+                        "name": "tags", 
+                        "eventq_index": 0, 
+                        "hit_latency": 2, 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "sequential_access": false, 
+                        "assoc": 2, 
+                        "cxx_class": "LRU", 
+                        "path": "system.cpu.itb_walker_cache.tags", 
+                        "block_size": 64, 
+                        "type": "LRU", 
+                        "size": 1024
+                    }, 
+                    "system": "system", 
+                    "max_miss_count": 0, 
+                    "eventq_index": 0, 
+                    "mem_side": {
+                        "peer": "system.tol2bus.slave[2]", 
+                        "role": "MASTER"
+                    }, 
+                    "mshrs": 10, 
+                    "forward_snoops": false, 
+                    "hit_latency": 2, 
+                    "demand_mshr_reserve": 1, 
+                    "tgts_per_mshr": 12, 
+                    "addr_ranges": [
+                        "0:18446744073709551615"
+                    ], 
+                    "assoc": 2, 
+                    "prefetch_on_access": false, 
+                    "path": "system.cpu.itb_walker_cache", 
+                    "name": "itb_walker_cache", 
+                    "type": "BaseCache", 
+                    "sequential_access": false, 
+                    "cpu_side": {
+                        "peer": "system.cpu.itb.walker.port", 
+                        "role": "SLAVE"
+                    }
+                }, 
+                "clk_domain": "system.cpu_clk_domain", 
+                "function_trace_start": 0, 
+                "cpu_id": 0, 
+                "checker": null, 
+                "eventq_index": 0, 
+                "do_quiesce": true, 
+                "type": "TimingSimpleCPU", 
+                "profile": 0, 
+                "icache_port": {
+                    "peer": "system.cpu.icache.cpu_side", 
+                    "role": "MASTER"
+                }, 
+                "icache": {
+                    "is_top_level": true, 
+                    "prefetcher": null, 
+                    "clk_domain": "system.cpu_clk_domain", 
+                    "write_buffers": 8, 
+                    "response_latency": 2, 
+                    "cxx_class": "BaseCache", 
+                    "size": 131072, 
+                    "tags": {
+                        "name": "tags", 
+                        "eventq_index": 0, 
+                        "hit_latency": 2, 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "sequential_access": false, 
+                        "assoc": 2, 
+                        "cxx_class": "LRU", 
+                        "path": "system.cpu.icache.tags", 
+                        "block_size": 64, 
+                        "type": "LRU", 
+                        "size": 131072
+                    }, 
+                    "system": "system", 
+                    "max_miss_count": 0, 
+                    "eventq_index": 0, 
+                    "mem_side": {
+                        "peer": "system.tol2bus.slave[0]", 
+                        "role": "MASTER"
+                    }, 
+                    "mshrs": 4, 
+                    "forward_snoops": true, 
+                    "hit_latency": 2, 
+                    "demand_mshr_reserve": 1, 
+                    "tgts_per_mshr": 20, 
+                    "addr_ranges": [
+                        "0:18446744073709551615"
+                    ], 
+                    "assoc": 2, 
+                    "prefetch_on_access": false, 
+                    "path": "system.cpu.icache", 
+                    "name": "icache", 
+                    "type": "BaseCache", 
+                    "sequential_access": false, 
+                    "cpu_side": {
+                        "peer": "system.cpu.icache_port", 
+                        "role": "SLAVE"
+                    }
+                }, 
+                "interrupts": {
+                    "int_master": {
+                        "peer": "system.membus.slave[2]", 
+                        "role": "MASTER"
+                    }, 
+                    "name": "interrupts", 
+                    "pio": {
+                        "peer": "system.membus.master[0]", 
+                        "role": "SLAVE"
+                    }, 
+                    "int_slave": {
+                        "peer": "system.membus.master[1]", 
+                        "role": "SLAVE"
+                    }, 
+                    "pio_latency": 100000, 
+                    "clk_domain": "system.cpu.apic_clk_domain", 
+                    "system": "system", 
+                    "int_latency": 1000, 
+                    "eventq_index": 0, 
+                    "cxx_class": "X86ISA::Interrupts", 
+                    "path": "system.cpu.interrupts", 
+                    "pio_addr": 2305843009213693952, 
+                    "type": "X86LocalApic"
+                }, 
+                "dcache_port": {
+                    "peer": "system.cpu.dcache.cpu_side", 
+                    "role": "MASTER"
+                }, 
+                "socket_id": 0, 
+                "max_insts_all_threads": 0, 
+                "path": "system.cpu", 
+                "max_loads_any_thread": 0, 
+                "switched_out": false, 
+                "workload": [
+                    {
+                        "uid": 100, 
+                        "pid": 100, 
+                        "kvmInSE": false, 
+                        "cxx_class": "LiveProcess", 
+                        "executable": "./src/benchmark", 
+                        "drivers": [], 
+                        "system": "system", 
+                        "gid": 100, 
+                        "eventq_index": 0, 
+                        "env": [], 
+                        "input": "cin", 
+                        "ppid": 99, 
+                        "type": "LiveProcess", 
+                        "cwd": "/media/xnwang30/Storage/benchmark/trial/CompilerOptimisation-Coursework-1/spec/456.hmmer", 
+                        "simpoint": 0, 
+                        "euid": 100, 
+                        "path": "system.cpu.workload", 
+                        "max_stack_size": 67108864, 
+                        "name": "workload", 
+                        "cmd": [
+                            "./src/benchmark", 
+                            "--fixed", 
+                            "0", 
+                            "--mean", 
+                            "325", 
+                            "--num", 
+                            "45000", 
+                            "--sd", 
+                            "200", 
+                            "--seed", 
+                            "0", 
+                            "bombesin.hmm"
+                        ], 
+                        "errout": "cerr", 
+                        "useArchPT": false, 
+                        "egid": 100, 
+                        "output": "cout"
+                    }
+                ], 
+                "name": "cpu", 
+                "dtb": {
+                    "name": "dtb", 
+                    "eventq_index": 0, 
+                    "cxx_class": "X86ISA::TLB", 
+                    "walker": {
+                        "name": "walker", 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "system": "system", 
+                        "eventq_index": 0, 
+                        "cxx_class": "X86ISA::Walker", 
+                        "path": "system.cpu.dtb.walker", 
+                        "type": "X86PagetableWalker", 
+                        "port": {
+                            "peer": "system.cpu.dtb_walker_cache.cpu_side", 
+                            "role": "MASTER"
+                        }, 
+                        "num_squash_per_cycle": 4
+                    }, 
+                    "path": "system.cpu.dtb", 
+                    "type": "X86TLB", 
+                    "size": 64
+                }, 
+                "simpoint_start_insts": [], 
+                "max_insts_any_thread": 0, 
+                "progress_interval": 0, 
+                "branchPred": null, 
+                "dcache": {
+                    "is_top_level": true, 
+                    "prefetcher": null, 
+                    "clk_domain": "system.cpu_clk_domain", 
+                    "write_buffers": 8, 
+                    "response_latency": 2, 
+                    "cxx_class": "BaseCache", 
+                    "size": 131072, 
+                    "tags": {
+                        "name": "tags", 
+                        "eventq_index": 0, 
+                        "hit_latency": 2, 
+                        "clk_domain": "system.cpu_clk_domain", 
+                        "sequential_access": false, 
+                        "assoc": 2, 
+                        "cxx_class": "LRU", 
+                        "path": "system.cpu.dcache.tags", 
+                        "block_size": 64, 
+                        "type": "LRU", 
+                        "size": 131072
+                    }, 
+                    "system": "system", 
+                    "max_miss_count": 0, 
+                    "eventq_index": 0, 
+                    "mem_side": {
+                        "peer": "system.tol2bus.slave[1]", 
+                        "role": "MASTER"
+                    }, 
+                    "mshrs": 4, 
+                    "forward_snoops": true, 
+                    "hit_latency": 2, 
+                    "demand_mshr_reserve": 1, 
+                    "tgts_per_mshr": 20, 
+                    "addr_ranges": [
+                        "0:18446744073709551615"
+                    ], 
+                    "assoc": 2, 
+                    "prefetch_on_access": false, 
+                    "path": "system.cpu.dcache", 
+                    "name": "dcache", 
+                    "type": "BaseCache", 
+                    "sequential_access": false, 
+                    "cpu_side": {
+                        "peer": "system.cpu.dcache_port", 
+                        "role": "SLAVE"
+                    }
+                }, 
+                "isa": [
+                    {
+                        "eventq_index": 0, 
+                        "path": "system.cpu.isa", 
+                        "type": "X86ISA", 
+                        "name": "isa", 
+                        "cxx_class": "X86ISA::ISA"
+                    }
+                ], 
+                "tracer": {
+                    "eventq_index": 0, 
+                    "path": "system.cpu.tracer", 
+                    "type": "ExeTracer", 
+                    "name": "tracer", 
+                    "cxx_class": "Trace::ExeTracer"
+                }
+            }
+        ], 
+        "l2": {
+            "is_top_level": false, 
+            "prefetcher": null, 
+            "clk_domain": "system.cpu_clk_domain", 
+            "write_buffers": 8, 
+            "response_latency": 20, 
+            "cxx_class": "BaseCache", 
+            "size": 1048576, 
+            "tags": {
+                "name": "tags", 
+                "eventq_index": 0, 
+                "hit_latency": 20, 
+                "clk_domain": "system.cpu_clk_domain", 
+                "sequential_access": false, 
+                "assoc": 1, 
+                "cxx_class": "LRU", 
+                "path": "system.l2.tags", 
+                "block_size": 64, 
+                "type": "LRU", 
+                "size": 1048576
+            }, 
+            "system": "system", 
+            "max_miss_count": 0, 
+            "eventq_index": 0, 
+            "mem_side": {
+                "peer": "system.membus.slave[1]", 
+                "role": "MASTER"
+            }, 
+            "mshrs": 20, 
+            "forward_snoops": true, 
+            "hit_latency": 20, 
+            "demand_mshr_reserve": 1, 
+            "tgts_per_mshr": 12, 
+            "addr_ranges": [
+                "0:18446744073709551615"
+            ], 
+            "assoc": 1, 
+            "prefetch_on_access": false, 
+            "path": "system.l2", 
+            "name": "l2", 
+            "type": "BaseCache", 
+            "sequential_access": false, 
+            "cpu_side": {
+                "peer": "system.tol2bus.master[0]", 
+                "role": "SLAVE"
+            }
+        }, 
+        "cpu_voltage_domain": {
+            "name": "cpu_voltage_domain", 
+            "eventq_index": 0, 
+            "voltage": [
+                "1.0"
+            ], 
+            "cxx_class": "VoltageDomain", 
+            "path": "system.cpu_voltage_domain", 
+            "type": "VoltageDomain"
+        }, 
+        "mem_ctrls": [
+            {
+                "static_frontend_latency": 10000, 
+                "tRFC": 260000, 
+                "activation_limit": 4, 
+                "in_addr_map": true, 
+                "IDD3N2": "0.0", 
+                "tWTR": 7500, 
+                "IDD52": "0.0", 
+                "clk_domain": "system.clk_domain", 
+                "channels": 1, 
+                "write_buffer_size": 64, 
+                "device_bus_width": 8, 
+                "VDD": "1.5", 
+                "write_high_thresh_perc": 85, 
+                "cxx_class": "DRAMCtrl", 
+                "bank_groups_per_rank": 0, 
+                "IDD2N2": "0.0", 
+                "port": {
+                    "peer": "system.membus.master[2]", 
+                    "role": "SLAVE"
+                }, 
+                "tCCD_L": 0, 
+                "IDD2N": "0.05", 
+                "null": false, 
+                "IDD2P1": "0.0", 
+                "eventq_index": 0, 
+                "tRRD": 6000, 
+                "tRTW": 2500, 
+                "IDD4R": "0.187", 
+                "burst_length": 8, 
+                "tRTP": 7500, 
+                "IDD4W": "0.165", 
+                "tWR": 15000, 
+                "banks_per_rank": 8, 
+                "devices_per_rank": 8, 
+                "IDD2P02": "0.0", 
+                "IDD6": "0.0", 
+                "IDD5": "0.22", 
+                "tRCD": 13750, 
+                "type": "DRAMCtrl", 
+                "IDD3P02": "0.0", 
+                "IDD0": "0.075", 
+                "IDD62": "0.0", 
+                "min_writes_per_switch": 16, 
+                "mem_sched_policy": "frfcfs", 
+                "IDD02": "0.0", 
+                "IDD2P0": "0.0", 
+                "ranks_per_channel": 2, 
+                "page_policy": "open_adaptive", 
+                "IDD4W2": "0.0", 
+                "tCS": 2500, 
+                "tCL": 13750, 
+                "read_buffer_size": 32, 
+                "conf_table_reported": true, 
+                "tCK": 1250, 
+                "tRAS": 35000, 
+                "tRP": 13750, 
+                "tBURST": 5000, 
+                "path": "system.mem_ctrls", 
+                "tXP": 0, 
+                "tXS": 0, 
+                "addr_mapping": "RoRaBaCoCh", 
+                "IDD3P0": "0.0", 
+                "IDD3P1": "0.0", 
+                "IDD3N": "0.057", 
+                "name": "mem_ctrls", 
+                "tXSDLL": 0, 
+                "device_size": 536870912, 
+                "dll": true, 
+                "tXAW": 30000, 
+                "write_low_thresh_perc": 50, 
+                "range": "0:536870911", 
+                "VDD2": "0.0", 
+                "IDD2P12": "0.0", 
+                "tRRD_L": 0, 
+                "tXPDLL": 0, 
+                "IDD4R2": "0.0", 
+                "device_rowbuffer_size": 1024, 
+                "static_backend_latency": 10000, 
+                "max_accesses_per_row": 16, 
+                "IDD3P12": "0.0", 
+                "tREFI": 7800000
+            }
+        ], 
+        "num_work_ids": 16, 
+        "work_item_id": -1, 
+        "work_begin_cpu_id_exit": -1
+    }, 
+    "time_sync_period": 100000000000, 
+    "eventq_index": 0, 
+    "time_sync_spin_threshold": 100000000, 
+    "cxx_class": "Root", 
+    "path": "root", 
+    "time_sync_enable": false, 
+    "type": "Root", 
+    "full_system": false
+}
